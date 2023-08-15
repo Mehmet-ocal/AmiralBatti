@@ -6,7 +6,7 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const navigation = useNavigation(); // Navigation hook'unu kullanın
+  const navigation = useNavigation();
 
   const handleLogin = () => {
     // Burada giriş işlemlerini yapabilirsiniz
@@ -14,7 +14,7 @@ const Login = () => {
   };
 
   const handleRegister = () => {
-    navigation.navigate('Register'); // Register ekranına yönlendirme
+    navigation.navigate('Register');
   };
 
 
@@ -61,9 +61,9 @@ const styles = StyleSheet.create({
     paddingBottom: 100, // Alt boşluk
   },
   title: {
-    fontSize: 48, // Metin boyutu
-    fontWeight: 'bold', // Kalın yazı
-    color: '#D9D0C1', // Metin rengi
+    fontSize: 48, 
+    fontWeight: 'bold', 
+    color: '#D9D0C1', 
     textShadowColor: 'rgba(0, 0, 0, 1)', // Gölge rengi
     textShadowOffset: { width: 5, height: 4 }, // Gölge konumu
     textShadowRadius: 5, // Gölge yarıçapı
@@ -77,8 +77,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 10,
     paddingHorizontal: 10,
-    fontWeight: 'bold', // Yazıyı kalınlaştırma
-    color: 'black', // Input içinde yazı rengi
+    fontWeight: 'bold', 
+    color: 'black', 
     borderBottomColor: '#3498db', // Input alt çizgi rengi
     borderBottomWidth: 2, // Input alt çizgi kalınlığı
   },

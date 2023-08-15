@@ -24,7 +24,7 @@ function App() {
             headerShown: false,
           }}
         />
-        {/* Diğer ekranları buraya ekleyebilirsiniz */}
+       
       </Stack.Navigator>
     </NavigationContainer>
   );

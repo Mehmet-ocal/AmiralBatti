@@ -58,9 +58,9 @@ const styles = StyleSheet.create({
     paddingBottom: 100,
   },
   title: {
-    fontSize: 28, // Metin boyutu
-    fontWeight: 'bold', // Kalın yazı
-    color: '#D9D0C1', // Metin rengi
+    fontSize: 28, 
+    fontWeight: 'bold', 
+    color: '#D9D0C1', 
     textShadowColor: 'rgba(0, 0, 0, 1)', // Gölge rengi
     textShadowOffset: { width: 3, height: 3 }, // Gölge konumu
     textShadowRadius: 5, // Gölge yarıçapı
@@ -74,8 +74,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 10,
     paddingHorizontal: 10,
-    fontWeight: 'bold', // Yazıyı kalınlaştırma
-    color: 'black', // Input içinde yazı rengi
+    fontWeight: 'bold', 
+    color: 'black',
     borderBottomColor: '#3498db', // Input alt çizgi rengi
     borderBottomWidth: 2, // Input alt çizgi kalınlığı
   },
