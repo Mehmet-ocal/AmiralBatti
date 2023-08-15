@@ -1,22 +1,32 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useFormik } from 'formik'; // useFormik eklemeyi unutmayın
+import * as yup from 'yup';
+
+const LoginSchema = yup.object().shape({
+  username: yup.string().required('*Kullanıcı adı zorunludur.'),
+  password: yup.string().required('*Şifre zorunludur.'),
+});
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-
   const navigation = useNavigation();
 
-  const handleLogin = () => {
-    // Burada giriş işlemlerini yapabilirsiniz
-    console.log('Giriş yapıldı:', username, password);
-  };
+  const formik = useFormik({
+    initialValues: {
+      username: '',
+      password: '',
+    },
+    validationSchema: LoginSchema,
+    onSubmit: async (values) => {
+      console.log('Giriş yapıldı:', values.username, values.password);
+      // Burada giriş işlemlerini yapabilirsiniz
+    },
+  });
 
   const handleRegister = () => {
     navigation.navigate('Register');
   };
-
 
   return (
     <View style={styles.container}>
@@ -27,17 +37,25 @@ const Login = () => {
         <TextInput
           style={styles.input}
           placeholder="Kullanıcı Adı"
-          value={username}
-          onChangeText={text => setUsername(text)}
+          value={formik.values.username}
+          onChangeText={formik.handleChange('username')}
+          onBlur={formik.handleBlur('username')}
         />
+        {formik.touched.username && formik.errors.username ? (
+          <Text style={styles.errorText}>{formik.errors.username}</Text>
+        ) : null}
         <TextInput
           style={styles.input}
           placeholder="Şifre"
           secureTextEntry
-          value={password}
-          onChangeText={text => setPassword(text)}
+          value={formik.values.password}
+          onChangeText={formik.handleChange('password')}
+          onBlur={formik.handleBlur('password')}
         />
-        <TouchableOpacity style={styles.buttonContainer} onPress={handleLogin}>
+        {formik.touched.password && formik.errors.password ? (
+          <Text style={styles.errorText}>{formik.errors.password}</Text>
+          ) : null}
+        <TouchableOpacity style={styles.buttonContainer} onPress={formik.handleSubmit}>
           <Text style={styles.buttonText}>Giriş Yap</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={handleRegister}>
@@ -47,6 +65,9 @@ const Login = () => {
     </View>
   );
 };
+
+export default Login;
+
 
 const styles = StyleSheet.create({
   container: {
@@ -58,16 +79,16 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'flex-end',
     alignItems: 'center',
-    paddingBottom: 100, // Alt boşluk
+    paddingBottom: 100,
   },
   title: {
     fontSize: 48, 
     fontWeight: 'bold', 
     color: '#D9D0C1', 
-    textShadowColor: 'rgba(0, 0, 0, 1)', // Gölge rengi
-    textShadowOffset: { width: 5, height: 4 }, // Gölge konumu
-    textShadowRadius: 5, // Gölge yarıçapı
-    marginBottom: 20, // Alttaki boşluk
+    textShadowColor: 'rgba(0, 0, 0, 1)',
+    textShadowOffset: { width: 5, height: 4 },
+    textShadowRadius: 5,
+    marginBottom: 20,
   },
   input: {
     width: 200,
@@ -78,9 +99,9 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 10,
     fontWeight: 'bold', 
-    color: 'black', 
-    borderBottomColor: '#3498db', // Input alt çizgi rengi
-    borderBottomWidth: 2, // Input alt çizgi kalınlığı
+    color: 'black',
+    borderBottomColor: '#3498db',
+    borderBottomWidth: 2,
   },
   backgroundImage: {
     ...StyleSheet.absoluteFillObject,
@@ -109,6 +130,11 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
   },
+  errorText: {
+    fontSize: 14,
+    color: 'red',
+    marginBottom: 10,
+    fontWeight: 'bold',
+  },
 });
 
-export default Login;
